@@ -1,0 +1,10 @@
+﻿
+@{
+    ViewBag.Title = "Error";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h3>An error occurred while processing your request: @ViewData["message"]</h3><br />
+<strong>Stack Trace</strong> <br />
+@ViewData["trace"]
+

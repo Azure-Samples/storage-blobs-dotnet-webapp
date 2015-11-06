@@ -1,0 +1,88 @@
+﻿@*
+//----------------------------------------------------------------------------------
+// Copyright (c) Microsoft Corporation. All rights reserved.
+//
+// THIS CODE AND INFORMATION ARE PROVIDED "AS IS" WITHOUT WARRANTY OF ANY KIND,
+// EITHER EXPRESSED OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE IMPLIED WARRANTIES
+// OF MERCHANTABILITY AND/OR FITNESS FOR A PARTICULAR PURPOSE.
+//----------------------------------------------------------------------------------
+// The example companies, organizations, products, domain names,
+// e-mail addresses, logos, people, places, and events depicted
+// herein are fictitious.  No association with any real company,
+// organization, product, domain name, email address, logo, person,
+// places, or events is intended or should be inferred.
+*@
+
+@{
+    ViewBag.Title = "Index";
+}
+@*Header Section*@
+<div class="jumbotron">
+    <h2>Azure Blob Storage Photo Gallery</h2>
+    <h5>Azure Blob storage is a service for storing large amounts of unstructured data, such as text or binary data, that can be accessed from anywhere in the world via HTTP or HTTPS. You can use Blob storage to expose data publicly to the world, or to store application data privately.</h5>
+    <span>
+        @*What is a Storage Account ACOM Link*@
+        <a class="btn btn-default" href="http://azure.microsoft.com/en-us/documentation/articles/storage-whatis-account/" target="_blank">What is a Storage Account &raquo;</a>
+        @*Getting Started with Blobs ACOM Link*@
+        <a class="btn btn-default" href="https://azure.microsoft.com/en-us/documentation/articles/storage-dotnet-how-to-use-blobs/" target="_blank">Getting Started with Blobs &raquo;</a>        
+    </span>
+</div>
+
+@*Select Files and Upload: Displays a 'Select Files' button that uses a File Upload control to select files to be uploaded and 
+  calls the JS function: DisplayFilesToUpload() that lists the file name and size for all files to be uploaded. 
+  Also the JS function displays the Upload submit button that calls UploadAsync that uploads the files to Azure Blob Storage.*@
+@using (Html.BeginForm("UploadAsync", "Home", FormMethod.Post, new { enctype = "multipart/form-data" }))
+{
+    <div class="fileUpload btn btn-default">
+        <span>Select Files</span><input type="file" id="file" name="selectFiles" class="upload" onchange="DisplayFilesToUpload()" multiple />
+    </div>
+    @* This gets populated from the DisplayFilesToUpload() JS function*@
+    <p id="FilesToUpload"></p>
+}
+
+@*loops through all files and displays three items:
+    - The Image (159x159) - [Set in .thumb css class]
+    - A delete icon (30X30) - [Set in .deleteDiv css class] (~/Images/deleteImage.png) that calls deleteImage JS function
+    - A DeleteAll button if there are any items that calls the DeleteAll controller Action*@
+@if (Model != null && Model.Count > 0)
+{
+    foreach (var item in Model)
+    {
+        <div class="imageBlock">
+            <a href="@item" target="_blank"><img class="thumb" src="@item" alt="images"/></a><br />
+            <div class="deleteDiv"><img class="deleteIcon" src="~/Images/deleteImage.png" title="Delete Image" onclick="deleteImage('@item');" /></div>
+        </div>
+    }
+
+    using (Html.BeginForm("DeleteAll", "Home", FormMethod.Post, new { enctype = "multipart/form-data" }))
+    {
+        <div class="fileUpload btn btn-default"><span>Delete All Files</span><input type="submit" name="deleteAll" class="upload" /></div>
+    }
+}
+<script>
+    //Calls async Task<ActionResult> DeleteImage(string name) in the HomeController and Refreshes the page
+    function deleteImage(item) {
+        var url = "/Home/DeleteImage";
+        $.post(url, { Name: item }, function (data) {
+            window.location.href = "/Home/Index";
+        });
+    }
+
+    //Lists the file name and size for all files to be uploaded by updating the <p id="FilesToUpload"></p> control
+    function DisplayFilesToUpload() {
+        var element = document.getElementById("file");
+        var html = "";
+
+        html = "<h3>Image(s) to Upload</h3>"
+        for (var i = 0; i < element.files.length; i++) {
+            html += "<strong>" + (i + 1) + "</strong>. File: ";
+            var file = element.files[i];
+            if ('name' in file) {html += file.name + " (";}
+            if ('size' in file) {html += "size: " + file.size + " bytes)<br>";}
+        }
+
+        html += "<div class='fileUpload btn btn-default'><span>Upload</span><input type='submit' class='upload' value='Upload'/></div>"
+        document.getElementById("FilesToUpload").innerHTML = html;
+    }
+
+</script>
