@@ -1,7 +1,7 @@
 ---
 services: storage
 platforms: dotnet
-author: bursteg
+author: perrysk-msft
 ---
 
 # storage-blobs-dotnet-webapp
