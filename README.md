@@ -4,7 +4,8 @@ platforms: dotnet
 author: perrysk-msft
 ---
 
-# storage-blobs-dotnet-webapp
+# Azure Blob Storage Photo Gallery Web Application
+
 Azure Blob Storage Photo Gallery Web Application using ASP.NET MVC 5. The sample uses the .NET 4.5 asynchronous programming model to demonstrate how to call the Storage Service using the Storage .NET client library's asynchronous APIs.
 ## Running this sample
 1. Before you can run this sample, you must have the following perquisites:
