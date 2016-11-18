@@ -22,6 +22,7 @@ namespace WebApp_Storage_DotNet.Controllers
     using Microsoft.WindowsAzure;
     using Microsoft.WindowsAzure.Storage;
     using Microsoft.WindowsAzure.Storage.Blob;
+    using Microsoft.Azure;
 
     /// <summary> 
     /// Azure Blob Storage Photo Gallery - Demonstrates how to use the Blob Storage service.  
