@@ -19,7 +19,6 @@ namespace WebApp_Storage_DotNet.Controllers
     using System.Web;
     using System.Threading.Tasks;
     using System.IO;
-    using Microsoft.WindowsAzure;
     using Microsoft.WindowsAzure.Storage;
     using Microsoft.WindowsAzure.Storage.Blob;
     using Microsoft.Azure;
@@ -111,7 +110,7 @@ namespace WebApp_Storage_DotNet.Controllers
                     for (int i = 0; i < fileCount; i++)
                     {
                         CloudBlockBlob blob = blobContainer.GetBlockBlobReference(GetRandomBlobName(files[i].FileName));
-                        await blob.UploadFromFileAsync(files[i].FileName, FileMode.Open);
+                        await blob.UploadFromFileAsync(files[i].FileName);
                     }
                 }
                 return RedirectToAction("Index");
