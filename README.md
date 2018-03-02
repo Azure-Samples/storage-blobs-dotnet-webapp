@@ -4,7 +4,7 @@ platforms: dotnet
 author: perrysk-msft
 ---
 
-# Azure Blob Storage Photo Gallery Web Application Example - .NET
+# .NET Photo Gallery Web Application Example with Azure Blob Storage
 
 This example application creates a web photo gallery that allows you to host and view images through a web frontend. The code sample also includes functionality for deleting images.
 
