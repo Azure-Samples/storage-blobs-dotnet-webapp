@@ -23,6 +23,7 @@ namespace WebApp_Storage_DotNet.Controllers
     using Microsoft.WindowsAzure.Storage;
     using Microsoft.WindowsAzure.Storage.Blob;
     using Microsoft.Azure;
+    using System.Configuration;
 
     /// <summary> 
     /// Azure Blob Storage Photo Gallery - Demonstrates how to use the Blob Storage service.  
@@ -62,7 +63,7 @@ namespace WebApp_Storage_DotNet.Controllers
             {
                 // Retrieve storage account information from connection string
                 // How to create a storage connection string - http://msdn.microsoft.com/en-us/library/azure/ee758697.aspx
-                CloudStorageAccount storageAccount = CloudStorageAccount.Parse(CloudConfigurationManager.GetSetting("StorageConnectionString"));
+                CloudStorageAccount storageAccount = CloudStorageAccount.Parse(ConfigurationManager.AppSettings["StorageConnectionString"].ToString());
 
                 // Create a blob client for interacting with the blob service.
                 blobClient = storageAccount.CreateCloudBlobClient();
@@ -111,7 +112,7 @@ namespace WebApp_Storage_DotNet.Controllers
                     for (int i = 0; i < fileCount; i++)
                     {
                         CloudBlockBlob blob = blobContainer.GetBlockBlobReference(GetRandomBlobName(files[i].FileName));
-                        await blob.UploadFromFileAsync(files[i].FileName);
+                        await blob.UploadFromFileAsync(files[i].FileName, FileMode.Open);
                     }
                 }
                 return RedirectToAction("Index");
