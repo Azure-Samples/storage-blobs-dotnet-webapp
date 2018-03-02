@@ -4,9 +4,9 @@ platforms: dotnet
 author: perrysk-msft
 ---
 
-# .NET Photo Gallery Web Application Example with Azure Blob Storage
+# .NET Photo Gallery Web Application Sample with Azure Blob Storage
 
-This example application creates a web photo gallery that allows you to host and view images through a web frontend. The code sample also includes functionality for deleting images.
+This sample application creates a web photo gallery that allows you to host and view images through a .NET web frontend. The code sample also includes functionality for deleting images. At the end, you have the option of deploying the application to Azure.
 
 ![Azure Blob Storage Photo Gallery Web Application Sample .NET](./images/photo-gallery.png)
 
@@ -22,7 +22,7 @@ Azure Blob Storage Photo Gallery Web Application using ASP.NET MVC 5. The sample
 ## Running this sample
 1. Before you can run this sample, you must have the following prerequisites:
 	- The Azure Storage Emulator, which you can download [here](https://go.microsoft.com/fwlink/?linkid=717179&clcid=0x409). You can also read more about [Using the Azure Storage emulator for development](https://docs.microsoft.com/en-us/azure/storage/common/storage-use-emulator).
-	- Visual Studio 2015 (or higher).
+	- Visual Studio 2015 or Visual Studio 2017.
 
 2. Open the Azure Storage emulator. Once the emulator is running it will be able to process the images from the application.
 
