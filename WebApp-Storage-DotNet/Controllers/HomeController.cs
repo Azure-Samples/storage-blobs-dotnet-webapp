@@ -19,10 +19,8 @@ namespace WebApp_Storage_DotNet.Controllers
     using System.Web;
     using System.Threading.Tasks;
     using System.IO;
-    using Microsoft.WindowsAzure;
     using Microsoft.WindowsAzure.Storage;
     using Microsoft.WindowsAzure.Storage.Blob;
-    using Microsoft.Azure;
     using System.Configuration;
 
     /// <summary> 
@@ -63,7 +61,7 @@ namespace WebApp_Storage_DotNet.Controllers
             {
                 // Retrieve storage account information from connection string
                 // How to create a storage connection string - http://msdn.microsoft.com/en-us/library/azure/ee758697.aspx
-                CloudStorageAccount storageAccount = CloudStorageAccount.Parse(ConfigurationManager.AppSettings["StorageConnectionString"].ToString());
+                CloudStorageAccount storageAccount = CloudStorageAccount.Parse(ConfigurationManager.AppSettings["StorageConnectionString"]);
 
                 // Create a blob client for interacting with the blob service.
                 blobClient = storageAccount.CreateCloudBlobClient();
@@ -80,7 +78,7 @@ namespace WebApp_Storage_DotNet.Controllers
                 List<Uri> allBlobs = new List<Uri>();
                 foreach (IListBlobItem blob in blobContainer.ListBlobs())
                 {
-                    if (blob.GetType() == typeof(CloudBlockBlob))
+                    if (blob is CloudBlockBlob)
                         allBlobs.Add(blob.Uri);
                 }
 
@@ -163,9 +161,10 @@ namespace WebApp_Storage_DotNet.Controllers
             {
                 foreach (var blob in blobContainer.ListBlobs())
                 {
-                    if (blob.GetType() == typeof(CloudBlockBlob))
+                    var blockBlob = blob as CloudBlockBlob;
+                    if (blockBlob != null)
                     {
-                        await ((CloudBlockBlob)blob).DeleteIfExistsAsync();
+                        await blockBlob.DeleteIfExistsAsync();
                     }
                 }
 
@@ -182,10 +181,10 @@ namespace WebApp_Storage_DotNet.Controllers
         /// <summary> 
         /// string GetRandomBlobName(string filename): Generates a unique random file name to be uploaded  
         /// </summary> 
-        private string GetRandomBlobName(string filename)
+        private static string GetRandomBlobName(string filename)
         {
             string ext = Path.GetExtension(filename);
-            return string.Format("{0:10}_{1}{2}", DateTime.Now.Ticks, Guid.NewGuid(), ext);
+            return $"{DateTime.Now.Ticks:10}_{Guid.NewGuid()}{ext}";
         }
     }
 }
