@@ -76,7 +76,7 @@ namespace WebApp_Storage_DotNet.Controllers
                 // using: https://[InsertYourStorageAccountNameHere].blob.core.windows.net/webappstoragedotnet-imagecontainer/FileName 
                 await blobContainer.SetPermissionsAsync(new BlobContainerPermissions { PublicAccess = BlobContainerPublicAccessType.Blob });
 
-                // Gets all Cloud Block Blobs in the blobContainerName and passes them to teh view
+                // Gets all Cloud Block Blobs in the blobContainerName and passes them to the view
                 List<Uri> allBlobs = new List<Uri>();
                 foreach (IListBlobItem blob in blobContainer.ListBlobs())
                 {
