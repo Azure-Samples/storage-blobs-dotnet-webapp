@@ -1,7 +1,10 @@
 ---
-services: storage
-platforms: dotnet
-author: perrysk-msft
+languages:
+- csharp
+products:
+- azure
+- azure-storage
+topic: sample
 ---
 
 # .NET Photo Gallery Web Application Sample with Azure Blob Storage
