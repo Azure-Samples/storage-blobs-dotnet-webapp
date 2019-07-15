@@ -4,7 +4,7 @@ languages:
 products:
 - azure
 - azure-storage
-topic: sample
+page_type: sample
 ---
 
 # .NET Photo Gallery Web Application Sample with Azure Blob Storage
