@@ -19,11 +19,11 @@ namespace WebApp_Storage_DotNet.Controllers
     using System.Web;
     using System.Threading.Tasks;
     using System.IO;
-    using Microsoft.WindowsAzure;
-    using Microsoft.WindowsAzure.Storage;
-    using Microsoft.WindowsAzure.Storage.Blob;
+    using Microsoft.Azure.Storage;
+    using Microsoft.Azure.Storage.Blob;
     using Microsoft.Azure;
     using System.Configuration;
+    using System.Threading;
 
     /// <summary> 
     /// Azure Blob Storage Photo Gallery - Demonstrates how to use the Blob Storage service.  
@@ -112,7 +112,7 @@ namespace WebApp_Storage_DotNet.Controllers
                     for (int i = 0; i < fileCount; i++)
                     {
                         CloudBlockBlob blob = blobContainer.GetBlockBlobReference(GetRandomBlobName(files[i].FileName));
-                        await blob.UploadFromFileAsync(files[i].FileName, FileMode.Open);
+                        await blob.UploadFromStreamAsync(files[i].InputStream);
                     }
                 }
                 return RedirectToAction("Index");
