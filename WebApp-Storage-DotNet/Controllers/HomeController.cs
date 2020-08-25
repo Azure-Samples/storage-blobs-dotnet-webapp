@@ -112,7 +112,8 @@ namespace WebApp_Storage_DotNet.Controllers
                     for (int i = 0; i < fileCount; i++)
                     {
                         CloudBlockBlob blob = blobContainer.GetBlockBlobReference(GetRandomBlobName(files[i].FileName));
-                        await blob.UploadFromFileAsync(files[i].FileName, FileMode.Open);
+                        blob.Properties.ContentType = files[i].ContentType;
+                        await blob.UploadFromStreamAsync(files[i].InputStream);    
                     }
                 }
                 return RedirectToAction("Index");
