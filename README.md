@@ -16,7 +16,7 @@ This sample application creates a web photo gallery that allows you to host and 
 ## Technologies used
 - ASP.NET MVC 5
 - .NET 4.5
-- Azure Storage emulator
+- Azure Storage Emulator
 - Azure Web Apps
 - Azure Storage
 
@@ -24,10 +24,10 @@ Azure Blob Storage Photo Gallery Web Application using ASP.NET MVC 5. The sample
 
 ## Running this sample
 1. Before you can run this sample, you must have the following prerequisites:
-	- The Azure Storage Emulator, which you can download [here](https://go.microsoft.com/fwlink/?linkid=717179&clcid=0x409). You can also read more about [Using the Azure Storage emulator for development](https://docs.microsoft.com/en-us/azure/storage/common/storage-use-emulator).
+	- The Azure Storage Emulator, which you can download [here](https://go.microsoft.com/fwlink/?linkid=717179&clcid=0x409). You can also read more about [Using the Azure Storage Emulator for development](https://docs.microsoft.com/en-us/azure/storage/common/storage-use-emulator).
 	- Visual Studio 2015 or Visual Studio 2017.
 
-2. Open the Azure Storage emulator. Once the emulator is running it will be able to process the images from the application.
+2. Open the Azure Storage Emulator. Once the Emulator is running it will be able to process the images from the application.
 
 3. Clone this repository using Git for Windows (http://www.git-scm.com/), or download the zip file.
 
